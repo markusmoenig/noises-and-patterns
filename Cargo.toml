@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+    "noises-and-patterns",
+    "generator",
+]
+
+resolver = "2"
