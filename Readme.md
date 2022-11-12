@@ -1,4 +1,4 @@
-A curated list of common noises and patterns in computer graphics. Mostly taken from implementations in [Shadertoy](www.shadertoy.com). All implementations are under the MIT or similar.
+A curated list of common noises and patterns in computer graphics. Mostly taken from implementations on [Shadertoy](www.shadertoy.com). All implementations are under the MIT or similar.
 
 This library is intended for users who need access to raw, unprocessed noise values in Rust. This is not intended to be an effect or post processing library. All returned values are between [-1..1] or [0..1] as indicated.
 
@@ -10,7 +10,7 @@ This library uses the [nalgebra-glm](https://docs.rs/nalgebra-glm/latest/nalgebr
 
 ### Precision
 
-By default the library compiles to ```f32``` you can change the values in *lib.rs* as instructed and compile to f64 the library to f64 if needed.
+By default the library compiles to ```f32``` you can change the values in *lib.rs* as instructed and compile the library to ```f64`` if needed.
 
 ### The Traits
 
@@ -45,9 +45,7 @@ pub trait Pattern {
 Based on [1D, 2D & 3D Value Noise ](https://www.shadertoy.com/view/4dS3Wd)
 
 ```rust
-
     let mut pixels = vec![0;width * height * 4];
-
     let value = Value::new();
 
     for y in 0..height {
@@ -75,11 +73,8 @@ Based on [1D, 2D & 3D Value Noise ](https://www.shadertoy.com/view/4dS3Wd)
 ## Bricks
 
 ```rust
-    let bricks = Bricks::new();
-
-    // Generate
-
     let mut pixels = vec![0;width * height * 4];
+    let bricks = Bricks::new();
 
     for y in 0..height {
         for x in 0..width {
