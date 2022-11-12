@@ -13,6 +13,9 @@ pub type FP3 = glm::Vec3;
 pub mod noise;
 pub mod value;
 
+pub mod pattern;
+pub mod bricks;
+
 pub mod prelude {
     pub use crate::FP;
     pub use crate::FP2;
@@ -21,5 +24,9 @@ pub mod prelude {
     pub use nalgebra::*;
 
     pub use crate::noise::Noise;
+    pub use crate::pattern::Pattern;
+
     pub use crate::value::*;
+    pub use crate::bricks::*;
+
 }

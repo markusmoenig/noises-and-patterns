@@ -8,7 +8,8 @@ fn main() {
     let width = 640;
     let height = 400;
 
-    let value = Value::new();
+    //let value = Value::new();
+    let bricks = Bricks::new();
 
     // Generate
 
@@ -17,7 +18,8 @@ fn main() {
     for y in 0..height {
         for x in 0..width {
             // let v = value.get_2d(((x as FP) * 0.1, (y as FP) * 0.1));
-            let v = value.fbm_2d(((x as FP) * 0.1, (y as FP) * 0.1), 5);
+            //let v = value.fbm_2d(((x as FP) * 0.1, (y as FP) * 0.1), 5);
+            let v = bricks.pattern_2d(((x as FP / width as FP) * 8.0, (y as FP / height as FP) * 8.0));
 
             let v_u8 = (v * 255.0) as u8;
             let color = [v_u8, v_u8, v_u8, 255];

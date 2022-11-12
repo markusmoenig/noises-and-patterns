@@ -32,7 +32,7 @@ pub trait Pattern {
 
     fn new() -> Self;
 
-    /// 2D noise for the given position
+    /// 2D pattern for the given position
     fn pattern_2d(&self, p: (FP, FP)) -> FP;
 }
 
@@ -45,9 +45,7 @@ pub trait Pattern {
 Based on [1D, 2D & 3D Value Noise ](https://www.shadertoy.com/view/4dS3Wd)
 
 ```rust
-
     let mut pixels = vec![0;width * height * 4];
-
     let value = Value::new();
 
     for y in 0..height {
@@ -65,21 +63,13 @@ Based on [1D, 2D & 3D Value Noise ](https://www.shadertoy.com/view/4dS3Wd)
     }
 ```
 
-<table><tr>
-<td> <img src="images/value2d.png" alt="Value 2D" style="width: 500px;"/> </td>
-<td> <img src="images/value2d_fbm.png" alt="Value 2D FBM" style="width: 500px;"/> </td>
-</tr></table>
-
 # Patterns
 
 ## Bricks
 
 ```rust
-    let bricks = Bricks::new();
-
-    // Generate
-
     let mut pixels = vec![0;width * height * 4];
+    let bricks = Bricks::new();
 
     for y in 0..height {
         for x in 0..width {
@@ -95,7 +85,3 @@ Based on [1D, 2D & 3D Value Noise ](https://www.shadertoy.com/view/4dS3Wd)
         }
     }
 ```
-
-![Bricks](images/bricks.png)
-
-TODO Support the various brick parameters.
