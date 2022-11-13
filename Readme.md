@@ -1,6 +1,6 @@
-A curated list of common noises and patterns in computer graphics. Mostly taken from implementations on [Shadertoy](www.shadertoy.com). All implementations are under the MIT or similar.
+A curated list of common 2D noises and patterns in computer graphics. Mostly taken from implementations on [Shadertoy](www.shadertoy.com). All implementations are under the MIT or similar.
 
-This library is intended for users who need access to raw, unprocessed noise values in Rust. This is not intended to be an effect or post processing library. All returned values are between [-1..1] or [0..1] as indicated.
+This library is intended for users who need access to raw, unprocessed noise values in Rust. This is not intended to be an effect or post processing library. All returned values are between [0..1].
 
 Noise classes support both raw noises as well as smooth FBM variants.
 
@@ -14,7 +14,7 @@ By default the library compiles to ```f32``` via a type definition of ```FP``` i
 
 ### The Traits
 
-The traits for noises and patterns are very simple. Noises are currently 2D only, 3D coming later.
+The traits for noises and patterns are very simple.
 
 ```rust
 pub trait Noise {
