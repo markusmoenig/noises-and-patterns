@@ -35,22 +35,4 @@ impl Noise for Value {
 
         self.mix(&a, &b, &u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y
     }
-
-    fn fbm_2d(&self, p: (FP, FP), octaves: i32) -> FP {
-        let mut x = FP2::new(p.0, p.1);
-
-        let mut v = 0.0;
-        let mut a = 0.5;
-        let shift = FP2::new(100.0, 100.0);
-
-        // Rotate to reduce axial bias
-        let rot =  Matrix2::new(0.87758256189, 0.4794255386, -0.4794255386, 0.87758256189);
-
-        for _i in 0..octaves {
-            v += a * self.get_2d((x.x, x.y));
-            x = rot * x * 2.0 + shift;
-            a *= 0.5;
-        }
-        v
-    }
 }

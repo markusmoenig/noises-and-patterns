@@ -11,10 +11,8 @@ pub type FP3 = glm::Vec3;
 // pub type FP3 = glm::DVec3;
 
 pub mod noise;
-pub mod value;
 
 pub mod pattern;
-pub mod bricks;
 
 pub mod prelude {
     pub use crate::FP;
@@ -26,7 +24,8 @@ pub mod prelude {
     pub use crate::noise::Noise;
     pub use crate::pattern::Pattern;
 
-    pub use crate::value::*;
-    pub use crate::bricks::*;
+    pub use crate::noise::value::Value;
+    pub use crate::noise::voronoibasic::VoronoiBasic;
 
+    pub use crate::pattern::bricks::Bricks;
 }
