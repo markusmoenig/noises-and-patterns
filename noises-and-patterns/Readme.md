@@ -4,13 +4,11 @@ This library is intended for users who need access to raw, unprocessed noise val
 
 Noise classes support both raw noises as well as smooth FBM variants.
 
-This library is mostly a port of GPU noise and pattern implementations indended for computer graphics applications and games. If you need highest quality noise implementations you may have to look elsewhere.
-
 This library uses the [nalgebra-glm](https://docs.rs/nalgebra-glm/latest/nalgebra_glm/) crate as the math library (and is also its only dependency). The API however has no external dependencies.
 
 ### Precision
 
-By default the library compiles to ```f32``` via a type definition of ```FP``` in *lib.rs*, you can change  the type as instructed and compile the library to ```f64``` if needed.
+By default the library compiles to ```f32``` via a type definition of ```FP``` in *lib.rs*, you can change the type as instructed and compile the library to ```f64``` if needed.
 
 ### The Traits
 
@@ -49,12 +47,13 @@ Based on [1D, 2D & 3D Value Noise](https://www.shadertoy.com/view/4dS3Wd)
 
 ```rust
 let mut pixels = vec![0;width * height * 4];
-let value = Value::new();
+let noise = Value::new();
 
 for y in 0..height {
     for x in 0..width {
-        // let v = value.noise_2d(((x as FP) * 0.1, (y as FP) * 0.1));
-        let v = value.fbm_2d(((x as FP) * 0.1, (y as FP) * 0.1), 5);
+        let scale = 8.0;
+        // let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
+        let v = noise.fbm_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale), 5);
 
         let v_u8 = (v * 255.0) as u8;
         let color = [v_u8, v_u8, v_u8, 255];
@@ -76,7 +75,8 @@ let noise = VoronoiBasic::new();
 
 for y in 0..height {
     for x in 0..width {
-        let v = (noise.get_2d(((x as FP) * 0.01, (y as FP) * 0.01)) + 1.0) / 2.0;
+        let scale = 8.0;
+        let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
 
         let v_u8 = (v * 255.0) as u8;
         let color = [v_u8, v_u8, v_u8, 255];
@@ -87,6 +87,8 @@ for y in 0..height {
     }
 }
 ```
+
+![Voronoi](images/voronoibasic.png)
 
 # Patterns
 

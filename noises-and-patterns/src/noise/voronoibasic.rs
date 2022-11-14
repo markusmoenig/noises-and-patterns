@@ -39,7 +39,7 @@ impl Noise for VoronoiBasic {
             }
         }
 
-        return m.y + m.z;//m.x.sqrt()//, m.y+m.z );
+        (m.y + m.z) * 0.5 + 0.5
     }
 
 
