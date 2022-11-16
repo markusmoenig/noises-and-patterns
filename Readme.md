@@ -30,8 +30,8 @@ pub trait Pattern {
 
     fn new() -> Self;
 
-    /// 2D noise for the given position
-    fn pattern_2d(&self, p: (FP, FP)) -> FP;
+    /// 2D pattern for the given position, returns mask and id
+    fn pattern_2d(&self, p: (FP, FP)) -> (FP, FP);
 
     /// For setting pattern properties
     fn set_property(&mut self, name: &str, value: FP);
@@ -54,12 +54,9 @@ for y in 0..height {
         let scale = 8.0;
         // let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
         let v = noise.fbm_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale), 5);
-
         let v_u8 = (v * 255.0) as u8;
         let color = [v_u8, v_u8, v_u8, 255];
-
         let d = x * 4 + y * width * 4;
-
         pixels[d..d+4].copy_from_slice(&color);
     }
 }
@@ -72,7 +69,7 @@ for y in 0..height {
 
 ## VoronoiBasic
 
-Based on [Voronoi Basic](https://www.shadertoy.com/view/MslGD8)
+Based on [Voronoi Basic](https://www.shadertoy.com/view/MslGD8). Thanks [IQ!](https://iquilezles.org/articles/).
 
 ```rust
 let mut pixels = vec![0;width * height * 4];
@@ -82,12 +79,9 @@ for y in 0..height {
     for x in 0..width {
         let scale = 8.0;
         let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
-
         let v_u8 = (v * 255.0) as u8;
         let color = [v_u8, v_u8, v_u8, 255];
-
         let d = x * 4 + y * width * 4;
-
         pixels[d..d+4].copy_from_slice(&color);
     }
 }
@@ -99,7 +93,7 @@ for y in 0..height {
 
 ## Bricks
 
-Based on [Bricks and Tiles](https://www.shadertoy.com/view/lsVyRK). Used here with permission from Fabrice under the MIT.
+Based on [Bricks and Tiles](https://www.shadertoy.com/view/lsVyRK). Used here with permission from Fabrice under the MIT. Thanks [Fabrice!](http://www-evasion.imag.fr/Membres/Fabrice.Neyret/).
 
 ```rust
 let mut pixels = vec![0;width * height * 4];
@@ -108,13 +102,11 @@ bricks.set_property("round", 0.0);
 
 for y in 0..height {
     for x in 0..width {
-        let v = bricks.pattern_2d(((x as FP / width as FP), (y as FP / height as FP)));
 
-        let v_u8 = (v * 255.0) as u8;
+        let v = noise.pattern_2d(((x as FP / width as FP), (y as FP / height as FP)));
+        let v_u8 = (v.0 * v.1 * 255.0) as u8;
         let color = [v_u8, v_u8, v_u8, 255];
-
         let d = x * 4 + y * width * 4;
-
         pixels[d..d+4].copy_from_slice(&color);
     }
 }

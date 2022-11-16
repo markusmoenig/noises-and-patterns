@@ -136,7 +136,7 @@ dependencies = [
 
 [[package]]
 name = "noises-and-patterns"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "nalgebra",
  "nalgebra-glm",

@@ -8,10 +8,10 @@ fn main() {
     let width = 640;
     let height = 400;
 
-    // let noise = Value::new();
-    //let mut bricks = Bricks::new();
+    let noise = Value::new();
+    // let mut noise = Bricks::new();
     //bricks.set_property("round", 0.0);
-    let noise = VoronoiBasic::new();
+    // let noise = VoronoiBasic::new();
 
     // Generate
 
@@ -21,9 +21,9 @@ fn main() {
         for x in 0..width {
             let scale = 8.0;
             // let v = noise.get_2d(((x as FP) * 0.05, (y as FP) * 0.05));
-            let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
-            //let v = noise.fbm_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale), 5);
-            //let v = bricks.pattern_2d(((x as FP / width as FP), (y as FP / height as FP)));
+            // let v = noise.get_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale));
+            let v = noise.fbm_2d((((x as FP) / width as FP) * scale, ((y as FP) / height as FP) * scale), 5);
+            // let v = noise.get_2d(((x as FP / width as FP), (y as FP / height as FP)));
 
             let v_u8 = (v * 255.0) as u8;
             let color = [v_u8, v_u8, v_u8, 255];

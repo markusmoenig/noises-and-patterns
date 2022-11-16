@@ -17,10 +17,10 @@ impl Noise for Value {
         let i = glm::floor(&x);
         let f = glm::fract(&x);
 
-	    let a = self.hash2d(i);
-        let b = self.hash2d(i + FP2::new(1.0, 0.0));
-        let c = self.hash2d(i + FP2::new(0.0, 1.0));
-        let d = self.hash2d(i + FP2::new(1.0, 1.0));
+	    let a = self.hash21(i);
+        let b = self.hash21(i + FP2::new(1.0, 0.0));
+        let c = self.hash21(i + FP2::new(0.0, 1.0));
+        let d = self.hash21(i + FP2::new(1.0, 1.0));
 
         let u = FP2::new( f.x * f.x * (3.0 - 2.0 * f.x), f.y * f.y * (3.0 - 2.0 * f.y));
 

@@ -7,12 +7,14 @@ pub struct Bricks {
     gap                 : FP,
     bevel               : FP,
     round               : FP,
-
 }
 
 impl Pattern for Bricks {
 
     fn new() -> Self {
+
+
+
         Self {
             ratio       : 2.0,
             brick       : 1.0,
@@ -44,15 +46,14 @@ impl Pattern for Bricks {
         }
     }
 
-    fn pattern_2d(&self, p: (FP, FP)) -> FP {
+    fn pattern_2d(&self, p: (FP, FP)) -> (FP, FP) {
         let uv = FP2::new(p.0, p.1);
 
-        let mut u = uv;// + FP2::new(10000.0, 10000.0);
+        let mut u = uv + FP2::new(10000.0, 10000.0);
 
         let bevel = FP2::new(self.bevel, self.bevel);
         let gap = FP2::new(self.gap, self.gap);
         let round = self.round;
-        //let missing = 0.0;
 
         let w = FP2::new(self.ratio,1.0);
         u = u.component_mul(&FP2::new(self.cell, self.cell).component_div(&w));
@@ -60,8 +61,6 @@ impl Pattern for Bricks {
         if self.brick == 1.0 {
             u.x += 0.5 * u.y.floor() % 2.0;
         }
-
-        //hash = hash21(floor(U))
 
         let t = glm::fract(&u) - FP2::new(1.0, 1.0) / 2.0;
         let s = w.component_mul(&t);
@@ -73,11 +72,7 @@ impl Pattern for Bricks {
            m = (round - glm::length(&(FP2::new(round, round) - a))) * 2.0 / glm::dot(&bevel,&glm::normalize(&(FP2::new(round, round) - a)));
         }
 
-        //if MISSING > missingHash(floor(U)) {
-        //    isMissing = true
-        //}
-
-        m.clamp(0.0, 1.0)
+        (m.clamp(0.0, 1.0), self.hash21(glm::floor(&u)))
     }
 
 }

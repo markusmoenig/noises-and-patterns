@@ -1,6 +1,6 @@
 [package]
 name = "noises-and-patterns"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Markus Moenig"]
 description = "A procedural creator library for 2D noises and patterns"
